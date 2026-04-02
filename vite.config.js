@@ -14,4 +14,5 @@ export default defineConfig({
     open: true, // автоматически открывать страницу в браузере
     port: 5173, // порт dev-сервера
   },
+  base: "./",
 });
