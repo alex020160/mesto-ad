@@ -7,15 +7,13 @@
   new change!
   and change again
 */
-import {
-  createCardElement,
-  createInfoString,
-  createInfoList,
-} from "./components/card.js";
+import { createCardElement } from "./components/card.js";
 import {
   openModalWindow,
   closeModalWindow,
   setCloseModalWindowEventListeners,
+  createInfoString,
+  createInfoList,
 } from "./components/modal.js";
 
 // файл index.js
@@ -98,8 +96,8 @@ const handleProfileFormSubmit = (evt) => {
     about: profileDescriptionInput.value,
   })
     .then((userData) => {
-      profileTitle.textContent = userData.name;
-      profileDescription.textContent = userData.about;
+      pofileTitle.textContent = userData.name;
+      prorfileDescription.textContent = userData.about;
       closeModalWindow(profileFormModalWindow);
     })
     .catch((err) => {

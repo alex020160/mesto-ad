@@ -5,25 +5,6 @@ const getTemplate = () => {
     .cloneNode(true);
 };
 
-export const createInfoString = (term, description) => {
-  const template = document
-    .getElementById("popup-info-definition-template")
-    .content.querySelector(".popup__info-item")
-    .cloneNode(true);
-  template.querySelector(".popup__info-term").textContent = term;
-  template.querySelector(".popup__info-description").textContent = description;
-  return template;
-};
-
-export const createInfoList = (userName) => {
-  const userLiked = document
-    .getElementById("popup-info-user-preview-template")
-    .content.querySelector(".popup__list-item")
-    .cloneNode(true);
-  userLiked.textContent = userName;
-  return userLiked;
-};
-
 export const createCardElement = (
   data,
   { onPreviewPicture, onLikeIcon, onDeleteCard, userId, onInfo },
