@@ -5,6 +5,22 @@ const getTemplate = () => {
     .cloneNode(true);
 };
 
+export const isLiked = (likeButton) => {
+  return likeButton.classList.contains("card__like-button_is-active");
+};
+
+export const updateCard = (updatedLike, newCard, likeButton, likesAmount) => {
+  if (updatedLike) {
+    likeButton.classList.add("card__like-button_is-active");
+  } else {
+    likeButton.classList.remove("card__like-button_is-active");
+  }
+  likesAmount.textContent = newCard.likes.length;
+};
+
+export const deleteCard = (cardElementIndex) => {
+  cardElementIndex.remove();
+};
 export const createCardElement = (
   data,
   { onPreviewPicture, onLikeIcon, onDeleteCard, userId, onInfo },

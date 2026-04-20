@@ -7,7 +7,12 @@
   new change!
   and change again
 */
-import { createCardElement } from "./components/card.js";
+import {
+  createCardElement,
+  updateCard,
+  isLiked,
+  deleteCard,
+} from "./components/card.js";
 import {
   openModalWindow,
   closeModalWindow,
@@ -96,8 +101,8 @@ const handleProfileFormSubmit = (evt) => {
     about: profileDescriptionInput.value,
   })
     .then((userData) => {
-      pofileTitle.textContent = userData.name;
-      prorfileDescription.textContent = userData.about;
+      profileTitle.textContent = userData.name;
+      profileDescription.textContent = userData.about;
       closeModalWindow(profileFormModalWindow);
     })
     .catch((err) => {
@@ -162,17 +167,10 @@ const handleDeleteCard = (cardElement, cardId) => {
 };
 
 const handleLikeCard = (cardId, likeButton, likesAmount) => {
-  const isLiked = likeButton.classList.contains("card__like-button_is-active");
-  changeLikeCardStatus(cardId, isLiked)
+  changeLikeCardStatus(cardId, isLiked(likeButton))
     .then((newCard) => {
       const updatedLike = newCard.likes.some((user) => user._id === userId);
-
-      if (updatedLike) {
-        likeButton.classList.add("card__like-button_is-active");
-      } else {
-        likeButton.classList.remove("card__like-button_is-active");
-      }
-      likesAmount.textContent = newCard.likes.length;
+      updateCard(updatedLike, newCard, likeButton, likesAmount);
     })
     .catch((err) => {
       console.log(err);
@@ -188,7 +186,7 @@ cardRemoveForm.addEventListener("submit", (evt) => {
   deleteButton.textContent = "Удаление...";
   deleteCardApi(cardIdIndex)
     .then(() => {
-      cardElementIndex.remove();
+      deleteCard(cardElementIndex);
       cardElementIndex = null;
       cardIdIndex = null;
       closeModalWindow(cardRemoveModalWindow);
